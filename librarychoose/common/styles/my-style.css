@@ -1,0 +1,311 @@
+ /* 自定义公共样式 */
+
+/* 布局 */
+.my-content {
+	padding: 0px 15rpx;
+}
+.my-tc {
+	text-align: center;
+}
+.my-tl {
+	text-align: left;
+}
+.my-tr {
+	text-align: right;
+}
+.my-mt10 {
+	margin-top: 10px !important;
+}
+.my-mt5 {
+	margin-top: 5px !important;
+}
+.my-mt30rpx {
+	margin-top: 30rpx !important;
+}
+.my-mt20rpx {
+	margin-top: 20rpx !important;
+}
+.my-mt15rpx {
+	margin-top: 15rpx !important;
+}
+.my-mt10rpx {
+	margin-top: 10rpx !important;
+}
+.my-mt5rpx {
+	margin-top: 5rpx !important;
+}
+.my-mr10 {
+	margin-right: 10px !important;
+}
+.my-mr5 {
+	margin-right: 5px !important;
+}
+.my-mr30rpx {
+	margin-right: 30rpx !important;
+}
+.my-mr20rpx {
+	margin-right: 20rpx !important;
+}
+.my-mr15rpx {
+	margin-right: 15rpx !important;
+}
+.my-mr10rpx {
+	margin-right: 10rpx !important;
+}
+.my-mr5rpx {
+	margin-right: 5rpx !important;
+}
+.my-mb10 {
+	margin-bottom: 10px !important;
+}
+.my-mb5 {
+	margin-bottom: 5px !important;
+}
+.my-mb30rpx {
+	margin-bottom: 30rpx !important;
+}
+.my-mb20rpx {
+	margin-bottom: 20rpx !important;
+}
+.my-mb15rpx {
+	margin-bottom: 15rpx !important;
+}
+.my-mb10rpx {
+	margin-bottom: 10rpx !important;
+}
+.my-mb5rpx {
+	margin-bottom: 5rpx !important;
+}
+.my-ml10 {
+	margin-left: 10px !important;
+}
+.my-ml5 {
+	margin-left: 5px !important;
+}
+.my-ml30rpx {
+	margin-left: 30rpx !important;
+}
+.my-ml20rpx {
+	margin-left: 20rpx !important;
+}
+.my-ml15rpx {
+	margin-left: 15rpx !important;
+}
+.my-ml10rpx {
+	margin-left: 10rpx !important;
+}
+.my-ml5rpx {
+	margin-left: 5rpx !important;
+}
+.my-pt10 {
+	padding-top: 10px !important;
+}
+.my-pt5 {
+	padding-top: 5px !important;
+}
+.my-pt30rpx {
+	padding-top: 30rpx !important;
+}
+.my-pt20rpx {
+	padding-top: 20rpx !important;
+}
+.my-pt15rpx {
+	padding-top: 15rpx !important;
+}
+.my-pt10rpx {
+	padding-top: 10rpx !important;
+}
+.my-pt5rpx {
+	padding-top: 5rpx !important;
+}
+.my-pr10 {
+	padding-right: 10px !important;
+}
+.my-pr5 {
+	padding-right: 5px !important;
+}
+.my-pr30rpx {
+	padding-right: 30rpx !important;
+}
+.my-pr20rpx {
+	padding-right: 20rpx !important;
+}
+.my-pr15rpx {
+	padding-right: 15rpx !important;
+}
+.my-pr10rpx {
+	padding-right: 10rpx !important;
+}
+.my-pr5rpx {
+	padding-right: 5rpx !important;
+}
+.my-pb10 {
+	padding-bottom: 10px !important;
+}
+.my-pb5 {
+	padding-bottom: 5px !important;
+}
+.my-pb30rpx {
+	padding-bottom: 30rpx !important;
+}
+.my-pb20rpx {
+	padding-bottom: 20rpx !important;
+}
+.my-pb15rpx {
+	padding-bottom: 15rpx !important;
+}
+.my-pb10rpx {
+	padding-bottom: 10rpx !important;
+}
+.my-pb5rpx {
+	padding-bottom: 5rpx !important;
+}
+.my-pl10 {
+	padding-left: 10px !important;
+}
+.my-pl5 {
+	padding-left: 5px !important;
+}
+.my-pl30rpx {
+	padding-left: 30rpx !important;
+}
+.my-pl20rpx {
+	padding-left: 20rpx !important;
+}
+.my-pl15rpx {
+	padding-left: 15rpx !important;
+}
+.my-pl10rpx {
+	padding-left: 10rpx !important;
+}
+.my-pl5rpx {
+	padding-left: 5rpx !important;
+}
+
+/* 浮动 */
+.m-fl {
+    float: left;
+}
+.m-fr {
+    float: right;
+}
+
+/* 定位 */
+.m-relative {
+    position: relative;
+}
+.m-absolute {
+    position: absolute;
+}
+
+/* 边框 */
+.my-border-none {
+	border: none !important;
+}
+.my-border-r-none {
+	border-right: none !important;
+}
+
+/* 字体 */
+
+.my-f-xs {
+	font-size: 12px;
+}
+.my-f-s {
+	font-size: 14px;
+}
+.my-f-m {
+	font-size: 16px;
+}
+.my-f-l {
+	font-size: 18px;
+}
+.my-f-xl {
+	font-size: 20px;
+}
+.my-f-xxl {
+	font-size: 22px;
+}
+
+.my-fw-normal {
+	font-weight: normal !important;
+}
+.my-fw-bold {
+	font-weight: bold;
+}
+
+/* 字体颜色相关 */
+
+/* 主要 */
+.my-f-type-main {
+	color: #303133;
+}
+/* 常规 */
+.my-f-type-content {
+	color: #606266;
+}
+/* 次要 */
+.my-f-type-tips {
+	color: #909399;
+}
+.my-f-type-warning {
+	color: #ff9900;
+}
+.my-f-type-success {
+	color: #19be6b;
+}
+.my-f-type-info {
+	color: #909399;
+}
+
+/* 纯黑 */
+.my-f-black {
+	color: #000000 !important;
+}
+
+/* 背景相关 */
+
+/* 天青 */
+.my-bg-cyan {
+	color: #1cbbb4 !important;
+	background-color: #d2f1f0 !important;
+}
+/* 橄榄 */
+.my-bg-olive {
+	color: #8dc63f !important;
+	background-color: #e8f4d9 !important;
+}
+/* 明黄 */
+.my-bg-yellow {
+	color: #fbbd08 !important;
+	background-color: rgba(254,242,206,.82) !important;
+}
+
+/* 自定义伪元素相关 */
+
+.my-prefix-vertical-bar-r {
+	position: relative;
+}
+.my-prefix-vertical-bar-r:after {
+	position: absolute;
+	width: 1px;
+	top: 14px;
+	height: 35px;
+	content: '';
+	right: -8px;
+	background-color: currentColor;
+	color: #f1f1f1;
+}
+.my-prefix-vertical-bar-l {
+	position: relative;
+}
+.my-prefix-vertical-bar-l:after {
+	position: absolute;
+	width: 1px;
+	top: 14px;
+	height: 35px;
+	content: '';
+	left: -8px;
+	background-color: currentColor;
+	color: #f1f1f1;
+}
