@@ -1,7 +1,8 @@
-import logging, logging.config
+import logging.config
 from flask import Flask
 from flask_cors import CORS
-from config import logger_dict
+
+from config import dict_logger
 
 
 def create_app(config_name):
@@ -11,9 +12,9 @@ def create_app(config_name):
     # 跨域名
     CORS(app, supports_credentials=True)
     app.debug = False
-    logging.config.dictConfig(logger_dict)
-    logger = logging.getLogger(u'root')
+    logging.config.dictConfig(dict_logger)
     from .userservices import user_service
     from .seatservices import seat_service
     app.register_blueprint(seat_service, url_prefix='/seat/')
+    app.register_blueprint(user_service, url_prefix='/user/')
     return app
