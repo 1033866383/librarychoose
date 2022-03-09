@@ -4,7 +4,7 @@ import re
 from flask import current_app, request
 from flask_restful import Resource
 
-from app.dao.base import User, Permissions, connect, AlchemyEncoder, alchemy2json
+from app.dao.base import User, connect
 from app.util.jwtutil import generate_jwt
 from app.util.response import response
 
