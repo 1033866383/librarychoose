@@ -1,4 +1,3 @@
-import json
 import re
 
 from flask import current_app, request
@@ -29,6 +28,9 @@ class Register(Resource):
             res = session.query(User).filter(User.username == params.get("username")).all()
             if len(res) > 0:
                 return response(status_code=500, msg="账户已存在")
+            res = session.query(User).filter(User.email == params.get("email")).all()
+            if len(res) > 0:
+                return response(status_code=500, msg="邮箱已使用")
             item_user = User(username=params.get("username"),
                              password=params.get("password"),
                              email=params.get("email"),

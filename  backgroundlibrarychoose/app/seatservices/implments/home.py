@@ -1,7 +1,7 @@
 from flask import current_app
 from flask_restful import Resource
 
-from app.dao.base import  connect, Seat
+from app.dao.base import connect, Seat
 from app.util.response import response
 
 
