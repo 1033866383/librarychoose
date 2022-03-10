@@ -71,25 +71,18 @@ class User(Base):
         self.info = kwargs.get("info", "")
 
 
-class City(Base):
-    __tablename__ = 'city'
-    id = Column(Integer, primary_key=True, autoincrement=True)
-    name = Column(String(128), nullable=True, comment="城市名称")
-
-
 class Library(Base):
     __tablename__ = 'library'
     id = Column(Integer, primary_key=True, autoincrement=True)
     name = Column(String(128), nullable=True, comment="图书馆名称")
     max_seat = Column(Integer, nullable=True, comment="最大可容纳人数")
-    city_id = Column(Integer, ForeignKey("city.id"))
+    position = Column(String(255), nullable=True, comment="图书馆的位置")
 
 
 class Seat(Base):
     __tablename__ = 'seat'
     id = Column(Integer, primary_key=True, autoincrement=True)
     library = Column(Integer, ForeignKey("library.id"))
-    max_seat = Column(Integer, nullable=True, comment="最大可容纳人数")
     position = Column(String(10), nullable=True, comment="座位的定位")
     price = Column(String(100), nullable=True, comment="价格规则：如： 6点-10点：10元/小时, 10 -12 15元/小时 数据结构：{'1': 10, '2': 10}")
 
