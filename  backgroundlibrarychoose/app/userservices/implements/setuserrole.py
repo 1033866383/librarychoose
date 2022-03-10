@@ -22,7 +22,8 @@ class LowUserRole(Resource):
             res = session.query(User).filter(User.username == username).update({"role_id": Permissions.BADE_USER})
             if res:
                 return response()
-
+            else:
+                return response(status_code=500, msg="修改失败")
 
 class SetUserRoleNormal(Resource):
 
@@ -41,3 +42,5 @@ class SetUserRoleNormal(Resource):
             res = session.query(User).filter(User.username == username).update({"role_id": Permissions.NORMAL_USER})
             if res:
                 return response()
+            else:
+                return response(status_code=500, msg="修改失败")

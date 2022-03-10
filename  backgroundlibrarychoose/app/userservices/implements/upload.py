@@ -32,5 +32,8 @@ class Upload(Resource):
                 except Exception as e:
                     current_app.logger.info(e)
             info["icon"] = "/static/" + username + "_icon.png"
-            user = session.query(User).filter(User.username == username).update({"info": json.dumps(info)})
-        return response()
+            res = session.query(User).filter(User.username == username).update({"info": json.dumps(info)})
+            if res:
+                return response()
+            else:
+                return response(status_code=500, msg="修改失败")
