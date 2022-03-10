@@ -1,5 +1,3 @@
-import json
-
 from flask import current_app, request
 from flask_restful import Resource
 

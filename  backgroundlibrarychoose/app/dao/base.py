@@ -111,12 +111,12 @@ class Permissions(object):
     权限类
     """
     USER_MANAGE = 0X01
-    UPDATE_PERMISSION = 0x02
+    NORMAL_USER = 0x02
     BADE_USER = 0x101
 
     path_permission = {
         USER_MANAGE: ["", ""],
-        UPDATE_PERMISSION: [""],
+        NORMAL_USER: [""],
         BADE_USER: []
     }
 

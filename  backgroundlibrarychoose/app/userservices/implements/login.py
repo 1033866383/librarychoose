@@ -33,7 +33,7 @@ class Login(Resource):
                 res_status = session.query(User).filter(User.username == username).filter(
                     User.password == password).first()
             if res_status:
-                jwt = generate_jwt({"username": res_status.username, "role_id": res_status.role_id})
+                jwt = generate_jwt({"username": res_status.username})
                 return response(data={"token": jwt, "name": res_status.name,
                                       "info": json.loads(res_status.info) if res_status.info else res_status.info})
             else:

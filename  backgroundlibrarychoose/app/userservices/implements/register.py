@@ -36,6 +36,6 @@ class Register(Resource):
                              email=params.get("email"),
                              iphone=params.get("iphone", ""),
                              name=params.get("name"),
-                             role_id=Permissions.USER_MANAGE)
+                             role_id=Permissions.NORMAL_USER)
             session.add(item_user)
             return response()

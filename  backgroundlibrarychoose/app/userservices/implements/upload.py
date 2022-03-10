@@ -1,8 +1,7 @@
 import json
 import os.path
 
-import requests
-from flask import current_app, request, url_for, redirect
+from flask import current_app, request
 from flask_restful import Resource
 
 from app.dao.base import connect, User
