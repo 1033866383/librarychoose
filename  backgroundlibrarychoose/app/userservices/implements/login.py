@@ -1,4 +1,3 @@
-import json
 import re
 
 from flask import current_app, request
@@ -17,10 +16,10 @@ class Login(Resource):
         if params:
             username = params.get("username", "")
             password = params.get("password", "")
-            if not re.match("\d{10}", username) and not re.match(
+            if not re.match("\d{10}$", username) and not re.match(
                     "^[0-9a-zA-Z_]{0,19}@[0-9a-zA-Z]{1,13}\.[com,cn,net]{1,3}$", username):
                 return response(status_code=500, msg="账号无效")
-            if not re.match("\S{6,20}", password):
+            if not re.match("\S{6,20}$", password):
                 return response(status_code=500, msg="密码错误")
         else:
             return response(status_code=500, msg="illegal param")
