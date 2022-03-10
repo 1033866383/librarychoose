@@ -1,3 +1,4 @@
+import json
 import re
 
 from flask import current_app, request
@@ -33,6 +34,7 @@ class Login(Resource):
                     User.password == password).first()
             if res_status:
                 jwt = generate_jwt({"username": res_status.username, "role_id": res_status.role_id})
-                return response(data={"token": jwt, "name": res_status.name, "info": res_status.info})
+                return response(data={"token": jwt, "name": res_status.name,
+                                      "info": json.loads(res_status.info) if res_status.info else res_status.info})
             else:
                 return response(status_code=500, msg="账号或密码错误")

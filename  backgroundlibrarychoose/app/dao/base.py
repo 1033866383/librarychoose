@@ -30,6 +30,8 @@ class AlchemyEncoder(json.JSONEncoder):
             fields = {}
             for field in [x for x in dir(obj) if not x.startswith('_') and x != 'metadata']:
                 data = obj.__getattribute__(field)
+                if isinstance(obj, User) and field == "info" and data:
+                    data = json.loads(data)
                 try:
                     json.dumps(data)  # this will fail on non-encodable values, like other classes
                     fields[field] = data
