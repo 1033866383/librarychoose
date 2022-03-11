@@ -2,6 +2,6 @@ import { request } from './server.js'
 
 export const MobileLogin =
   function(params) {//手机号登录
-    return request.post('/status/200',params)
+    return request.post('/user/login',params)
     .then(data=>{return data.data})
   }

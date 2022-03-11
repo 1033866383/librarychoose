@@ -9,7 +9,7 @@
     <view class="list">
       <view class="list-call">
         <image class="img" src="/static/login/1.png"></image>
-        <input class="biaoti" v-model="account" type="number" maxlength="11" placeholder="输入手机号" />
+        <input class="biaoti" v-model="username" type="number" maxlength="20" placeholder="输入账号或邮箱" />
       </view>
       <view class="list-call">
         <image class="img" src="/static/login/2.png"></image>
@@ -46,7 +46,7 @@
     data() {
       return {
         requestLoading: false,
-        account: '',
+        username: '',
         password: '',
         providerList: [], //第三方oauthlist
         hasProvider: false, //是否有第三方授权
@@ -91,34 +91,21 @@
       },
       bindLogin() {
         /**
-         * 客户端对账号信息进行一些必要的校验。
-         */
-        if (!this.$u.test.mobile(this.account)) {
-          uni.showToast({
-            icon: 'none',
-            title: '请输入正确的手机号'
-          });
-          return;
-        }
-        if (this.password.length <= 0) {
-          uni.showToast({
-            icon: 'none',
-            title: '请输入密码'
-          });
-          return;
-        }
-        /**
          * 请求手机号登录接口
          */
         const param = {
-          Mobile: this.account,
-          Pwd: md5Libs.md5(this.password)
+          "username":this.username,
+		  "password":this.password
         }
         this.requestLoading = true
         MobileLogin(param).then(res => {
+		  uni.showToast({
+		      title: JSON.stringify(res.msg),
+		      duration: 2000
+		  });
           this.requestLoading = false
-          this.$u.vuex('vuex_hasLogin', true)
-          this.toMain()
+          // this.$u.vuex('vuex_hasLogin', true)
+          // this.toMain()
         }).catch((err) => {
           console.log('error', err)
           this.requestLoading = false

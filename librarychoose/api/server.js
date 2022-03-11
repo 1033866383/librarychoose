@@ -8,7 +8,7 @@ const app = new Vue()
 const request = new Request()
 
 request.setConfig((config) => { /* 设置全局配置 */
-  config.baseURL = proxy
+  config.baseURL = "http://localhost:8071"
 
   config.header = {
     ...config.header,
