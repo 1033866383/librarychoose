@@ -53,8 +53,6 @@ class AddGoods(Resource):
             goods = session.query(Goods).filter(Goods.seat == seat).filter(Goods.end_time >= datetime.strptime(start_time, "%Y-%m-%d %H:%M:%S")).filter(Goods.start_time <=datetime.strptime(end_time, "%Y-%m-%d %H:%M:%S")).first()
             if goods:
                 return response(status_code=500, msg="illegal param 当前时间区间有用户使用该座位无法占用")
-            print(start_time, end_time)
-            print(type(datetime.strptime(start_time, "%Y-%m-%d %H:%M:%S")), type(datetime.now()))
             goods_item = Goods(id=str(uuid.uuid1()),seat=seat, user=username, start_time=datetime.strptime(start_time, "%Y-%m-%d %H:%M:%S"), end_time=datetime.strptime(end_time, "%Y-%m-%d %H:%M:%S"), price=all_price(seat_item.price, start_time, end_time), status=0)
             session.add(goods_item)
             return response(alchemy2json(goods_item))
