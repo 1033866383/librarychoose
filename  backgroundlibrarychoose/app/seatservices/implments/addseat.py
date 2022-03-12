@@ -30,7 +30,7 @@ class AddSeat(Resource):
 
             else:
                 return response(status_code=500, msg="illegal param 错误的位置信息")
-        self.add_price(price)
+        price = self.add_price(price)
         with connect() as session:
             library_item = session.query(Library).filter(Library.id == library).first()
             if not library_item:
@@ -56,6 +56,7 @@ class AddSeat(Resource):
     def add_price(self, price):
         if not price:
             price = {}
-        for i in range(1, 25):
+        for i in range(0, 24):
             if not price.get(str(i)):
                 price[str(i)] = 10
+        return price

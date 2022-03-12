@@ -32,6 +32,8 @@ class AlchemyEncoder(json.JSONEncoder):
                 data = obj.__getattribute__(field)
                 if isinstance(obj, User) and field == "info" and data:
                     data = json.loads(data)
+                if isinstance(obj, Seat) and (field == "position" or field == "price") and data:
+                    data = json.loads(data)
                 try:
                     json.dumps(data)  # this will fail on non-encodable values, like other classes
                     fields[field] = data
@@ -55,11 +57,11 @@ class User(Base):
     id = Column(Integer, primary_key=True, autoincrement=True)
     username = Column(String(11), unique=True)
     name = Column(String(55))
-    password = Column(String(50), nullable=True)
+    password = Column(String(50), nullable=False)
     email = Column(String(100), unique=True)
     iphone = Column(String(15))
     info = Column(Text)  # 可配置参数，例如头像等其他可变参数
-    role_id = Column(Integer, nullable=True)
+    role_id = Column(Integer, nullable=False)
 
     def __init__(self, username, password, email, role_id, **kwargs):
         self.username = username
@@ -74,17 +76,17 @@ class User(Base):
 class Library(Base):
     __tablename__ = 'library'
     id = Column(Integer, primary_key=True, autoincrement=True)
-    name = Column(String(128), nullable=True, comment="图书馆名称")
-    max_seat = Column(Integer, nullable=True, comment="最大可容纳人数")
-    position = Column(String(255), nullable=True, comment="图书馆的位置")
+    name = Column(String(128), nullable=False, comment="图书馆名称")
+    max_seat = Column(Integer, nullable=False, comment="最大可容纳人数")
+    position = Column(String(255), nullable=False, comment="图书馆的位置")
 
 
 class Seat(Base):
     __tablename__ = 'seat'
     id = Column(Integer, primary_key=True, autoincrement=True)
     library = Column(Integer, ForeignKey("library.id"))
-    position = Column(String(10), nullable=True, comment="座位的定位")
-    price = Column(String(100), nullable=True, comment="价格规则：如： 6点-10点：10元/小时, 10 -12 15元/小时 数据结构：{'1': 10, '2': 10}")
+    position = Column(String(10), nullable=False, comment="座位的定位")
+    price = Column(String(100), nullable=False, comment="价格规则：如： 6点-10点：10元/小时, 10 -12 15元/小时 数据结构：{'1': 10, '2': 10}")
 
 
 class Goods(Base):
@@ -92,11 +94,12 @@ class Goods(Base):
     id = Column(String(255), primary_key=True)
     seat = Column(Integer, ForeignKey("seat.id"))
     user = Column(Integer, ForeignKey("users.id"))
-    create_time = Column(DateTime, nullable=True, default=datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+    create_time = Column(DateTime, nullable=False, default=datetime.datetime.now(),
                          comment="订单创建时间,这里是支付方可创建订单")
-    start_time = Column(DateTime, nullable=True, comment="坐位使用开始时间")
-    end_time = Column(DateTime, nullable=True, comment="坐位使用结束时间")
-    status = Column(Integer, nullable=True, comment="订单状态, 0 正常 1 已删除 2违约，相当于到点未签到")
+    start_time = Column(DateTime, nullable=False, comment="坐位使用开始时间")
+    end_time = Column(DateTime, nullable=False, comment="坐位使用结束时间")
+    status = Column(Integer, nullable=False, comment="订单状态, 0 正常 1 已删除")
+    price = Column(Integer, nullable=False, comment="订单需要支付的钱")
 
 
 class Permissions(object):
