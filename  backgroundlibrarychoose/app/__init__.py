@@ -5,6 +5,7 @@ from flask import Flask
 
 from flask_cors import CORS
 from config import dict_logger
+from .goodsservices import goods_services
 from .userservices import user_service
 from .seatservices import seat_service
 
@@ -20,5 +21,6 @@ def create_app(config_name):
     basedir = os.path.abspath(os.path.dirname(__file__))
     app.register_blueprint(seat_service, url_prefix='/seat/')
     app.register_blueprint(user_service, url_prefix='/user/')
+    app.register_blueprint(goods_services, url_prefix='/goods/')
     app.config['RBAC_USE_WHITE'] = True
     return app
