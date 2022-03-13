@@ -20,8 +20,6 @@
       <text>登录</text>
     </view>
     <view class="xieyi">
-      <navigator url="/" open-type="navigate">忘记密码</navigator>
-      <text>|</text>
       <navigator url="/" open-type="navigate">注册账户</navigator>
     </view>
     <view class="oauth-row" v-if="hasProvider" v-bind:style="{top: positionTop + 'px'}">

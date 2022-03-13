@@ -50,7 +50,7 @@ class AddGoods(Resource):
             seat_item = session.query(Seat).filter(Seat.id == seat).first()
             if not seat_item:
                 return response(status_code=500, msg="illegal param seat")
-            goods = session.query(Goods).filter(Goods.seat == seat).filter(Goods.end_time >= datetime.strptime(start_time, "%Y-%m-%d %H:%M:%S")).filter(Goods.start_time <=datetime.strptime(end_time, "%Y-%m-%d %H:%M:%S")).first()
+            goods = session.query(Goods).filter(Goods.seat == seat).filter(Goods.end_time >= datetime.strptime(start_time, "%Y-%m-%d %H:%M:%S")).filter(Goods.start_time <=datetime.strptime(end_time, "%Y-%m-%d %H:%M:%S")).filter(Goods.status == 0).first()
             if goods:
                 return response(status_code=500, msg="illegal param 当前时间区间有用户使用该座位无法占用")
             goods_item = Goods(id=str(uuid.uuid1()),seat=seat, user=username, start_time=datetime.strptime(start_time, "%Y-%m-%d %H:%M:%S"), end_time=datetime.strptime(end_time, "%Y-%m-%d %H:%M:%S"), price=all_price(seat_item.price, start_time, end_time), status=0)
