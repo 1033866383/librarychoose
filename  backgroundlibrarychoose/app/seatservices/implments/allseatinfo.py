@@ -9,9 +9,13 @@ class AllSeatInfo(Resource):
     def get(self):
         current_app.logger.info("info")
         id = request.args.get("id")
+        library = request.args.get("library")
         with connect() as session:
             if id:
                 res = session.query(Seat).filter(Seat.id == id).all()
+                return response(alchemy2json(res))
+            if library:
+                res = session.query(Seat).filter(Seat.library == library).all()
                 return response(alchemy2json(res))
             res = session.query(Seat).all()
             return response(alchemy2json(res))
