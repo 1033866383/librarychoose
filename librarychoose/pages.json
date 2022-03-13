@@ -21,12 +21,18 @@
         "navigationBarTitleText": "登录"
       }
     },
-    // {
-    //   "path": "pages/login/reg/index",
-    //   "style": {
-    //     "navigationBarTitleText": "注册"
-    //   }
-    // },
+    {
+      "path": "pages/login/register/index",
+      "style": {
+        "navigationBarTitleText": "注册"
+      }
+    },
+	{
+	  "path": "pages/manger/index",
+	  "style": {
+	    "navigationBarTitleText": "人员管理"
+	  }
+	},
     // {
     //   "path": "pages/login/forget-start/index",
     //   "style": {

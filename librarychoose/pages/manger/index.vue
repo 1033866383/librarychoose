@@ -4,7 +4,7 @@
     	<block slot="content">共享自习室</block>
     </my-custom>
     <view class="content">
-     Home
+     manger
     </view>
 		<my-component-tabar />
 	</view>

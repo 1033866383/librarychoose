@@ -9,7 +9,7 @@
     <view class="list">
       <view class="list-call">
         <image class="img" src="/static/login/1.png"></image>
-        <input class="biaoti" v-model="username" type="number" maxlength="20" placeholder="输入账号或邮箱" />
+        <input class="biaoti" v-model="username" type="text" maxlength="20" placeholder="输入账号或邮箱" />
       </view>
       <view class="list-call">
         <image class="img" src="/static/login/2.png"></image>
@@ -20,7 +20,7 @@
       <text>登录</text>
     </view>
     <view class="xieyi">
-      <navigator url="/" open-type="navigate">注册账户</navigator>
+      <navigator url="/pages/login/register/index" open-type="navigate">注册账户</navigator>
     </view>
     <view class="oauth-row" v-if="hasProvider" v-bind:style="{top: positionTop + 'px'}">
       <view class="oauth-image" v-for="provider in providerList" :key="provider.value">
@@ -97,13 +97,24 @@
         }
         this.requestLoading = true
         MobileLogin(param).then(res => {
-		  uni.showToast({
-		      title: JSON.stringify(res.msg),
-		      duration: 2000
-		  });
+		  console.log(res)
+		  if(res.data.token){
+			uni.showToast({
+			    title: JSON.stringify(res.msg),
+			    duration: 2000
+			});
+			uni.setStorageSync("lifeData", JSON.stringify(res.data))
+			this.toMain()
+		  }else{
+			  uni.showToast({
+			      title: JSON.stringify(res.msg),
+			      duration: 2000,
+				  icon:"error"
+			  });
+		  }
+		  
           this.requestLoading = false
-          // this.$u.vuex('vuex_hasLogin', true)
-          // this.toMain()
+          
         }).catch((err) => {
           console.log('error', err)
           this.requestLoading = false
