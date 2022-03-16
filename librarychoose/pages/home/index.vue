@@ -44,25 +44,38 @@
 </template>
 
 <script>
+	import {
+	  AllLibraryInfo
+	} from '@/api/seat.js'
 	export default {
 		data() {
 			return {
-				showpicture:true
+				showpicture:true,
+				alllibrary:[]
 			}
 		},
-    mounted() {
-      if (uni.getStorageSync("lifeData") === null || uni.getStorageSync("lifeData") === undefined || uni.getStorageSync("lifeData") === "") {
-        this.$u.route('/pages/login/login/index')
-      }
-	  this.showpicture = ((Math.floor(Math.random() * 10) + 1 % 2) === 2)
-    },
     methods: {
       navTo(url,params) {
         if (url) {
           this.$u.route(url, params)
         }
-      }
-    }
+      },
+	  libraryinfo(){
+		  AllLibraryInfo().then(res=>{
+			 uni.showToast({
+			     title: JSON.stringify(res.msg),
+			     duration: 2000
+			 });
+		  })
+	  }
+    },
+	created() {
+	  if (uni.getStorageSync("lifeData") === null || uni.getStorageSync("lifeData") === undefined || uni.getStorageSync("lifeData") === "") {
+	    this.$u.route('/pages/login/login/index')
+	  }
+	  this.showpicture = ((Math.floor(Math.random() * 10) + 1 % 2) === 2)
+	  this.libraryinfo()
+	},
 	}
 </script>
 

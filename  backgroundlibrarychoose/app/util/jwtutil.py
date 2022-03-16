@@ -2,6 +2,7 @@ import time
 from datetime import datetime, timedelta
 
 import jwt
+from flask import current_app
 
 headers = {
     'alg': "HS256",  # 声明所使用的算法
@@ -24,6 +25,7 @@ def verify_jwt(token, secret="system_create_is_fbz", algorithm="HS256"):
     time_now = datetime.now()
     time_now = time.mktime(time.strptime(time_now.strftime("%Y-%m-%d %H:%M:%S"), '%Y-%m-%d %H:%M:%S'))
     if token_dict.get("end_time", 0) > time_now:
+        current_app.logger.info("token info {0}".format(token_dict))
         return token_dict
     else:
         return None
