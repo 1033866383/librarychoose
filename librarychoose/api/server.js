@@ -19,7 +19,7 @@ request.setConfig((config) => { /* 设置全局配置 */
 })
 
 request.interceptors.request.use((config, cancel) => { /* 请求之前拦截器 */
-  const Token = uni.getStorageSync('lifeData').vuex_token ? uni.getStorageSync('lifeData').vuex_token : ''
+  const Token = uni.getStorageSync('token')
 
   config.header = {
     ...config.header,

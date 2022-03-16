@@ -20,14 +20,17 @@
 									</view>
 								
 									<view class="cu-card article" >
-												<view class="cu-item shadow" v-for="(item,i) in ['1','2','3']">
-													<view class="title"><view class="text-cut">图书馆名称</view></view>
+												<view class="cu-item shadow" v-for="(item,i) in alllibrary">
+													<view class="title"><view class="text-cut">{{item.name}}</view></view>
 													<view class="content">
-														<image src="/static/img/zxs.jpg"></image>
+														<image src="/static/img/zxs.jpg" v-if="i % 2 === 0"></image>
+														<image src="/static/img/1.jpg" v-if="i % 2 === 1"></image>
+														<image src="/static/img/2.jpg" v-if="i % 2 === 4"></image>
+														<image src="/static/img/3.jpg" v-if="i % 2 === 3"></image>
 														<view class="desc">
-															<view class="text-content"> 位置：</view>
+															<view class="text-content"> 位置：{{item.position}}</view>
 															<view>
-																<view class="cu-tag bg-red light sm round">最大容纳人数：10</view>
+																<view class="cu-tag bg-red light sm round">最大容纳人数：{{item.max_seat}}</view>
 																<br/>
 																<view class="cu-tag bg-green light sm round">营业时间：1:00-24:00</view>
 															</view>
@@ -62,10 +65,7 @@
       },
 	  libraryinfo(){
 		  AllLibraryInfo().then(res=>{
-			 uni.showToast({
-			     title: JSON.stringify(res.msg),
-			     duration: 2000
-			 });
+				this.alllibrary = res.data
 		  })
 	  }
     },

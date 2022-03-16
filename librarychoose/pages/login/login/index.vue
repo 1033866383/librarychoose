@@ -100,14 +100,15 @@
 		  console.log(res)
 		  if(res.data.token){
 			uni.showToast({
-			    title: JSON.stringify(res.msg),
+			    title: res.msg,
 			    duration: 2000
 			});
-			uni.setStorageSync("lifeData", JSON.stringify(res.data))
+			uni.setStorageSync("lifeData", res.data)
+			uni.setStorageSync("token", res.data.token)
 			this.toMain()
 		  }else{
 			  uni.showToast({
-			      title: JSON.stringify(res.msg),
+			      title: res.msg,
 			      duration: 2000,
 				  icon:"error"
 			  });
