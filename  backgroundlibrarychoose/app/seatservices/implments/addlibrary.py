@@ -18,8 +18,10 @@ class AddLibrary(Resource):
         position = params.get("position")
         if not name or not re.match("\S{1,100}$", name):
             return response(status_code=500, msg="名称有误")
-        if not max_seat or not re.match("\d{1,10}$", max_seat):
+        if not max_seat or not re.match("\d{1,4}$", max_seat):
             return response(status_code=500, msg="可容纳人数有误")
+        if int(max_seat) > 1000:
+            return response(status_code=500, msg="可容纳人数不能超过1000")
         if not position or not re.match("\S{1,100}$", position):
             return response(status_code=500, msg="位置有误")
         with connect() as session:
@@ -28,4 +30,13 @@ class AddLibrary(Resource):
                 return response(status_code=500, msg="该图书馆已存在")
             item = Library(name=name, max_seat=max_seat, position=position)
             session.add(item)
+            top = int(item.max_seat) // 10
+            last_left = int(item.max_seat) % 10
+            add_seats = []
+            for l in range(top + 1):
+                for t in range(10):
+                    add_seats.append({"left": l, "right": t, "local": "A"})
+            for i in range(last_left + 1):
+                add_seats.append({"left": top + 1, "right": i, "local": "A"})
+            current_app.logger.info(add_seats)
             return response()
