@@ -17,10 +17,15 @@ Base = declarative_base()
 def connect():
     current_app.logger.info("open connect")
     session = Session()
-    yield session
-    session.commit()
-    session.close()
-    current_app.logger.info("exit connect")
+    try:
+        yield session
+        session.commit()
+    except Exception as e:
+        session.rollback()
+        raise e
+    finally:
+        session.close()
+        current_app.logger.info("exit connect")
 
 
 class AlchemyEncoder(json.JSONEncoder):

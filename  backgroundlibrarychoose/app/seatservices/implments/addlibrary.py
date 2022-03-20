@@ -1,5 +1,7 @@
+import json
 import re
 
+import requests
 from flask import current_app, request
 from flask_restful import Resource
 
@@ -39,4 +41,10 @@ class AddLibrary(Resource):
             for i in range(last_left + 1):
                 add_seats.append({"left": top + 1, "right": i, "local": "A"})
             current_app.logger.info(add_seats)
+            session.commit()
+            res = requests.post(request.host_url + "seat/addseat", headers={"token": request.headers.get("token")},
+                                json={"library": item.id, "position": add_seats})
+            current_app.logger.info(res.text)
+            if json.loads(res.text).get("msg") != "success":
+                raise Exception("添加 seat 失败")
             return response()
