@@ -54,7 +54,8 @@
 		data() {
 			return {
 				showpicture:true,
-				alllibrary:[]
+				alllibrary:[],
+				allgoods:[]
 			}
 		},
     methods: {

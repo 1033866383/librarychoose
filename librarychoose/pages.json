@@ -51,7 +51,16 @@
         "navigationBarTitleText": "软件用户协议"
       }
     }
-  ],
+      ,{
+            "path" : "pages/home/seat/seat",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+    ],
   // "subPackages": [{
   //   "root": "packageaccount",
   //   "pages": [
