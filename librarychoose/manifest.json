@@ -1,26 +1,26 @@
 {
-    "name" : "librarychoose",
-    "appid" : "",
-    "description": "",
-    "versionName": "1.0.0",
-    "versionCode": "100",
-    "transformPx": false,
-    "app-plus": {
-        "usingComponents": true,
-        "nvueCompiler": "uni-app",
-        "splashscreen": {
-            "alwaysShowBeforeRender": true,
-            "waiting": true,
-            "autoclose": true,
-            "delay": 0
+    "name" : "com.fbz",
+    "appid" : "__UNI__C0A4221",
+    "description" : "",
+    "versionName" : "1.0.0",
+    "versionCode" : "100",
+    "transformPx" : false,
+    "app-plus" : {
+        "usingComponents" : true,
+        "nvueCompiler" : "uni-app",
+        "splashscreen" : {
+            "alwaysShowBeforeRender" : true,
+            "waiting" : true,
+            "autoclose" : true,
+            "delay" : 0
         },
-        "compatible": {
-            "ignoreVersion": true
+        "compatible" : {
+            "ignoreVersion" : true
         },
-        "modules": {},
-        "distribute": {
-            "android": {
-                "permissions": [
+        "modules" : {},
+        "distribute" : {
+            "android" : {
+                "permissions" : [
                     "<uses-feature android:name=\"android.hardware.camera\"/>",
                     "<uses-feature android:name=\"android.hardware.camera.autofocus\"/>",
                     "<uses-permission android:name=\"android.permission.ACCESS_COARSE_LOCATION\"/>",
@@ -44,88 +44,88 @@
                     "<uses-permission android:name=\"android.permission.WRITE_SETTINGS\"/>"
                 ]
             },
-            "ios": {},
-            "sdkConfigs": {
-                "oauth": {},
-                "ad": {}
+            "ios" : {},
+            "sdkConfigs" : {
+                "oauth" : {},
+                "ad" : {}
             },
-            "orientation": [
+            "orientation" : [
                 "portrait-primary",
                 "landscape-primary",
                 "portrait-secondary",
                 "landscape-secondary"
             ],
-            "icons": {
-                "android": {
-                    "hdpi": "",
-                    "xhdpi": "",
-                    "xxhdpi": "",
-                    "xxxhdpi": ""
+            "icons" : {
+                "android" : {
+                    "hdpi" : "",
+                    "xhdpi" : "",
+                    "xxhdpi" : "",
+                    "xxxhdpi" : ""
                 },
-                "ios": {
-                    "appstore": "",
-                    "ipad": {
-                        "app": "",
-                        "app@2x": "",
-                        "notification": "",
-                        "notification@2x": "",
-                        "proapp@2x": "",
-                        "settings": "",
-                        "settings@2x": "",
-                        "spotlight": "",
-                        "spotlight@2x": ""
+                "ios" : {
+                    "appstore" : "",
+                    "ipad" : {
+                        "app" : "",
+                        "app@2x" : "",
+                        "notification" : "",
+                        "notification@2x" : "",
+                        "proapp@2x" : "",
+                        "settings" : "",
+                        "settings@2x" : "",
+                        "spotlight" : "",
+                        "spotlight@2x" : ""
                     },
-                    "iphone": {
-                        "app@2x": "",
-                        "app@3x": "",
-                        "notification@2x": "",
-                        "notification@3x": "",
-                        "settings@2x": "",
-                        "settings@3x": "",
-                        "spotlight@2x": "",
-                        "spotlight@3x": ""
+                    "iphone" : {
+                        "app@2x" : "",
+                        "app@3x" : "",
+                        "notification@2x" : "",
+                        "notification@3x" : "",
+                        "settings@2x" : "",
+                        "settings@3x" : "",
+                        "spotlight@2x" : "",
+                        "spotlight@3x" : ""
                     }
                 }
             }
         }
     },
-    "quickapp": {},
-    "mp-weixin": {
-        "appid": "",
-        "setting": {
-            "urlCheck": false,
-            "minified": true
+    "quickapp" : {},
+    "mp-weixin" : {
+        "appid" : "",
+        "setting" : {
+            "urlCheck" : false,
+            "minified" : true
         },
-        "usingComponents": true,
-        "permission": {},
-        "optimization": {
-            "subPackages": true
+        "usingComponents" : true,
+        "permission" : {},
+        "optimization" : {
+            "subPackages" : true
         }
     },
-    "mp-alipay": {
-        "usingComponents": true
+    "mp-alipay" : {
+        "usingComponents" : true
     },
-    "mp-baidu": {
-        "usingComponents": true
+    "mp-baidu" : {
+        "usingComponents" : true
     },
-    "mp-toutiao": {
-        "usingComponents": true
+    "mp-toutiao" : {
+        "usingComponents" : true
     },
-    "h5": {
-        "title": "",
-        "router": {
-            "mode": "hash"
+    "h5" : {
+        "title" : "",
+        "router" : {
+            "mode" : "hash"
         },
-        "devServer": {
-            "port": 8000,
-            "disableHostCheck": true,
-            "proxy": {
-                "/api": {
-                    "target": "http://xxxx.cn",
-                    "changeOrigin": true,
-                    "secure": false,
-                    "pathRewrite": {
-                        "^/api": ""
+        "devServer" : {
+            "port" : 8000,
+            "disableHostCheck" : true,
+            "proxy" : {
+                "/api" : {
+                    "target" : "http://xxxx.cn",
+                    "changeOrigin" : true,
+                    "secure" : false,
+                    "pathRewrite" : {
+                        "^/api" : ""
                     }
                 }
             }
