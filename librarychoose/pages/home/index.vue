@@ -20,7 +20,7 @@
 									</view>
 								
 									<view class="cu-card article" >
-												<view class="cu-item shadow" v-for="(item,i) in alllibrary">
+												<view class="cu-item shadow" v-for="(item,i) in alllibrary" @click="goseat(item)">
 													<view class="title"><view class="text-cut">{{item.name}}</view></view>
 													<view class="content">
 														<image src="/static/img/zxs.jpg" v-if="i % 2 === 0"></image>
@@ -55,10 +55,15 @@
 			return {
 				showpicture:true,
 				alllibrary:[],
-				allgoods:[]
+				allgoods:[],
+			
 			}
 		},
     methods: {
+		goseat(item){
+			uni.setStorageSync("library", item)
+			  this.$u.route('/pages/home/seat/seat')
+		},
       navTo(url,params) {
         if (url) {
           this.$u.route(url, params)

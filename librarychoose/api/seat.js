@@ -15,8 +15,17 @@ function(param) {
 
 export const AllSeatInfo = 
 function(id, library) {
-    return request.get('/seat/allseatinfo?id='+id+"&library="+library)
-    .then(data=>{return data.data})
+	if(id && !library){
+		return request.get('/seat/allseatinfo?id='+id)
+		.then(data=>{return data.data})
+	}else if(!id && library){
+		return request.get('/seat/allseatinfo?library='+library)
+		.then(data=>{return data.data})
+	}else{
+		return request.get('/seat/allseatinfo?id='+id+"&library="+library)
+		.then(data=>{return data.data})
+	}
+    
 }
 
 export const AddSeat = 
