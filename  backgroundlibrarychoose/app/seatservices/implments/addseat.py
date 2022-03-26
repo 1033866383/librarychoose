@@ -15,7 +15,7 @@ class AddSeat(Resource):
         library = params.get("library")
         position = params.get("position")
         price = params.get("price")
-        current_app.logger.info("info {0}".format(params))
+        # current_app.logger.info("info {0}".format(params))
         if not library:
             return response(status_code=500, msg="illegal param 缺少图书馆位置")
         if not isinstance(position, dict):
