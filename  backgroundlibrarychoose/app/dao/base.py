@@ -39,6 +39,8 @@ class AlchemyEncoder(json.JSONEncoder):
                     data = json.loads(data)
                 if isinstance(obj, Seat) and (field == "position" or field == "price") and data:
                     data = json.loads(data)
+                if isinstance(data, datetime.datetime):
+                    data = data.strftime("%Y-%m-%d %H:%M:%S")
                 try:
                     json.dumps(data)  # this will fail on non-encodable values, like other classes
                     fields[field] = data
