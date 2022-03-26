@@ -22,5 +22,5 @@ class AllGoodsInfo(Resource):
             elif user.role_id == Permissions.USER_MANAGE and request.args.get("userid"):
                 res = session.query(Goods).filter(Goods.user == request.args.get("userid")).all()
             elif user.role_id == Permissions.NORMAL_USER or user.role_id == Permissions.BADE_USER or user.role_id == Permissions.USER_MANAGE:
-                res = session.query(Goods).filter(Goods.user == user.id).all()
+                res = session.query(Goods).filter(Goods.user == user.username).all()
             return response(alchemy2json(res))

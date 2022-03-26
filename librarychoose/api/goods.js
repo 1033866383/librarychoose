@@ -17,3 +17,9 @@ function(starttime, endtime) {
     return request.get('goods/usingseat?start_time='+starttime + "&end_time="+endtime)
     .then(data=>{return data.data})
 }
+
+export const AllGoodsInfo = 
+function() {
+    return request.get('goods/allgoodsinfo')
+    .then(data=>{return data.data})
+}

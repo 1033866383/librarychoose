@@ -50,6 +50,10 @@
 	import {
 	  AllLibraryInfo
 	} from '@/api/seat.js'
+	import {
+		AllGoodsInfo
+	} from '@/api/goods.js'
+	
 	export default {
 		data() {
 			return {
@@ -73,6 +77,12 @@
 		  AllLibraryInfo().then(res=>{
 				this.alllibrary = res.data
 		  })
+	  },
+	  goodsinfo(){
+		  AllGoodsInfo().then(res=>{
+			  this.allgoods = res.data
+		  })
+		  
 	  }
     },
 	created() {
@@ -81,6 +91,7 @@
 	  }
 	  this.showpicture = ((Math.floor(Math.random() * 10) + 1 % 2) === 2)
 	  this.libraryinfo()
+	  this.goodsinfo()
 	},
 	}
 </script>
