@@ -61,6 +61,15 @@
             
         }
         
+        ,{
+            "path" : "pages/home/seat/paysuc/paysuc",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
   // "subPackages": [{
   //   "root": "packageaccount",

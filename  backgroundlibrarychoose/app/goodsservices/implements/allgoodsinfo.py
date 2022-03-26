@@ -1,7 +1,7 @@
 from flask import current_app, request
 from flask_restful import Resource
 
-from app.dao.base import connect, User, Permissions, Goods
+from app.dao.base import connect, User, Permissions, Goods, alchemy2json
 from app.util.jwtutil import verify_jwt
 from app.util.response import response
 
@@ -23,4 +23,4 @@ class AllGoodsInfo(Resource):
                 res = session.query(Goods).filter(Goods.user == request.args.get("userid")).all()
             elif user.role_id == Permissions.NORMAL_USER or user.role_id == Permissions.BADE_USER or user.role_id == Permissions.USER_MANAGE:
                 res = session.query(Goods).filter(Goods.user == user.id).all()
-            return response(res)
+            return response(alchemy2json(res))

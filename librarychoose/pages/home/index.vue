@@ -62,7 +62,7 @@
     methods: {
 		goseat(item){
 			uni.setStorageSync("library", item)
-			  this.$u.route('/pages/home/seat/seat')
+			this.$u.route('/pages/home/seat/seat')
 		},
       navTo(url,params) {
         if (url) {

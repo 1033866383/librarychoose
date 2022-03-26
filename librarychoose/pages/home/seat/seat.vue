@@ -23,7 +23,9 @@
 									<span style="float: left;">
 									</span>
 										<span value ='0' :checked="true" v-for="(item,r) in right">
-											<image src="/static/unselected.png" style="width: 26px;height: 26px;" v-if="allseat[l][r] !== -1"></image>
+											<image src="/static/unselected.png" style="width: 26px;height: 26px;" v-if="allseat[l][r] !== -1" @click="chooseseat(l, r)" v-show="(JSON.stringify(targetseat) !== JSON.stringify([l, r])) && (usingseat.indexOf(allseat[l][r]) === -1)"></image>
+											<image src="/static/selected.png" style="width: 26px;height: 26px;" v-if="allseat[l][r] !== -1" @click="chooseseat(l, r)" v-show="(JSON.stringify(targetseat) === JSON.stringify([l, r])) && (usingseat.indexOf(allseat[l][r]) === -1)"></image>
+											<image src="/static/bought.png" style="width: 26px;height: 26px;" v-if="allseat[l][r] !== -1" v-show="usingseat.indexOf(allseat[l][r]) !== -1"></image>
 										</span>
 									<br/>
 	
@@ -41,7 +43,7 @@
 							
 						</view>
 						<view>
-							<button type="warn" class="footer" style="text-align: center; width: 95%;">下一步</button>
+							<button type="warn" class="footer" style="text-align: center; width: 95%;" @click="generprice">下一步</button>
 						</view>
 						
 				</view>
@@ -52,38 +54,131 @@
 	import {
 	  AllSeatInfo
 	} from '@/api/seat.js'
+	import{
+		GenerPrice,
+		AddGoods,
+		UsingSeat
+	}from '@/api/goods.js'
 		export default {
 			components: {
 				MxDatePicker
 			},
 			data() {
 				return {
+					targetseat:[],
 					library:uni.getStorageSync("library").name,
 					left:[],
 					right:[],
 					allseat:[[]],
 					checkva:"0",
 					checkc:false,
-					rangetime: ['2022/01/01 14:00','2022/01/01 14:59'],
+					rangetime: ['2022/04/01 14:00:00','2022/04/01 15:00:00'],
 					type: 'rangetime',
 					value: '',
-					showPicker: false
+					showPicker: false,
+					usingseat:[]
 				}
 			},
 			methods: {
+				generprice(){
+					if(!this.value){
+						uni.showToast({
+						    title: "未择占用时间",
+						    duration: 2000,
+							icon:"error"
+						});
+						return
+					}
+					if(this.targetseat.length !== 2){
+						uni.showToast({
+						    title: "未选择座位",
+						    duration: 2000,
+							icon:"error"
+						});
+						return
+					}
+					var data = {seat:this.allseat[this.targetseat[0]][this.targetseat[1]], start_time: this.value[0].replace("/", "-").replace("/", "-").replace("/", "-"), end_time: this.value[1].replace("/", "-").replace("/", "-").replace("/", "-")}
+					GenerPrice(data).then(res=>{
+						console.log(res)
+						if(res.msg !== 'success'){
+								uni.showToast({
+								    title: res.msg,
+								    duration: 2000,
+									icon:"error"
+								});
+						}else{
+							uni.showModal({
+							    title: '支付提示',
+							    content: '您选择了' + this.library +"第" + (this.targetseat[1] + 1)+"列第" + (this.targetseat[0] + 1) + "排的座位，占用时间："+this.value[0] +"--" + this.value[1] + "  需要支付" + res.data + "元",
+							    confirmText: "确认支付",
+								success: function (res) {
+							        if (res.confirm) {
+							            console.log('用户点击确定');
+										AddGoods(data).then(res=>{
+											console.log(res)
+											if(res.msg !== 'success'){
+													uni.showToast({
+													    title: res.msg,
+													    duration: 2000,
+														icon:"error"
+													});
+											}else{
+												uni.redirectTo({
+													url: '/pages/home/seat/paysuc/paysuc'
+												});
+											}
+										}).then(
+										UsingSeat(data.start_time, data.end_time).then(res=>{
+											this.usingseat = res.data
+										})
+										)
+							        } else if (res.cancel) {
+							            console.log('用户点击取消');
+							        }
+							    }
+							});
+		
+						}
+					})
+				},
+				chooseseat(l, r){
+					if(this.value.length !== 2){
+						uni.showToast({
+							    title: "请先选择占用时间",
+							    duration: 2000,
+								icon:"error"
+							});
+							return
+						
+					}
+					if(JSON.stringify(this.targetseat) === JSON.stringify([l, r])){
+						this.targetseat = []
+					}else{
+						this.targetseat = [l,r]
+					}
+					console.log(JSON.stringify(this.targetseat) === JSON.stringify([l, r]))
+				},
 				onShowDatePicker(type){//显示
 					this.type = type;
 					this.showPicker = true;
 					this.value = this[type];
+					UsingSeat(this.value[0].replace("/", "-").replace("/", "-").replace("/", "-"), this.value[1].replace("/", "-").replace("/", "-").replace("/", "-")).then(res=>{
+						this.usingseat = res.data
+					})
 				},
 				onSelected(e) {//选择
 					this.showPicker = false;
 					if(e) {
 						this[this.type] = e.value; 
+						this.value = e.value
 						//选择的值
 						console.log('value => '+ e.value);
 						//原始的Date对象
 						console.log('date => ' + e.date);
+						UsingSeat(this.value[0].replace("/", "-").replace("/", "-").replace("/", "-"), this.value[1].replace("/", "-").replace("/", "-").replace("/", "-")).then(res=>{
+							this.usingseat = res.data
+						})
+						console.log(this.usingseat)
 					}
 				},
 				getseatinfo(){
