@@ -70,6 +70,15 @@
             }
             
         }
+        ,{
+            "path" : "pages/home/scanner/scanner",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
   // "subPackages": [{
   //   "root": "packageaccount",

@@ -5,8 +5,8 @@
     </my-custom>
     <view class="content">
 					<view class="flex solid-bottom padding align-start">
-						 <image v-if="showpicture" class="img" src="/static/img/zxs.jpg" style="width: 100%; height: 150px; border-radius: 1%;"></image>
-						 <image v-if="!showpicture" class="img" src="/static/img/zxs.png" style="width: 100%; height: 150px; border-radius: 1%;"></image>					
+						 <image v-if="showpicture" class="img" src="/static/img/zxs.jpg" style="width: 100%; height: 150px; border-radius: 1%;" ></image>
+						 <image v-if="!showpicture" class="img" src="/static/img/zxs.png" style="width: 100%; height: 150px; border-radius: 1%;" ></image>					
 					</view>
 					<view class="cu-bar bg-white  margin-top solid-bottom">
 									<view class="action">
@@ -15,14 +15,14 @@
 								</view>
 								<view class="bg-white">
 									<view class="flex solid-bottom padding align-start" >
-											<button class="cu-btn" style="width: 48%; height: 100px; background-color: #78E343;font-size:25px;color: #FFFFFF;margin-right: 1%;">自习室</button>
-											<button class="cu-btn" style="width: 48%; height: 100px;background-color: #EBDC30;font-size:25px;color: #FFFFFF;margin-left: 1%;">订单</button>										
+											<button class="cu-btn" style="width: 48%; height: 100px; background-color: #78E343;font-size:25px;color: #FFFFFF;margin-right: 1%;" @click="change('library')">自习室</button>
+											<button class="cu-btn" style="width: 48%; height: 100px;background-color: #EBDC30;font-size:25px;color: #FFFFFF;margin-left: 1%;" @click="change('goods')">订单</button>										
 									</view>
 								
 									<view class="cu-card article" >
-												<view class="cu-item shadow" v-for="(item,i) in alllibrary" @click="goseat(item)">
+												<view v-show="showlist === 'library'" class="cu-item shadow" v-for="(item,i) in alllibrary" @click="goseat(item)">
 													<view class="title"><view class="text-cut">{{item.name}}</view></view>
-													<view class="content">
+													<view class="content" >
 														<image src="/static/img/zxs.jpg" v-if="i % 2 === 0"></image>
 														<image src="/static/img/1.jpg" v-if="i % 2 === 1"></image>
 														<image src="/static/img/2.jpg" v-if="i % 2 === 4"></image>
@@ -33,6 +33,30 @@
 																<view class="cu-tag bg-red light sm round">最大容纳人数：{{item.max_seat}}</view>
 																<br/>
 																<view class="cu-tag bg-green light sm round">营业时间：1:00-24:00</view>
+															</view>
+														</view>
+													</view>
+												</view>
+												
+												<view v-show="showlist === 'goods'" class="cu-item shadow" v-for="(item,i) in allgoods" @click="goscan">
+													<view class="title"><view class="text-cut">订单号：{{item.id}}</view></view>
+													<view class="content" >
+														
+
+														
+														<image src="/static/img/zxs.jpg" v-if="i % 2 === 0"></image>
+														<image src="/static/img/1.jpg" v-if="i % 2 === 1"></image>
+														<image src="/static/img/2.jpg" v-if="i % 2 === 4"></image>
+														<image src="/static/img/3.jpg" v-if="i % 2 === 3"></image>
+														<view class="desc">
+															<view class="cu-tag bg-red light sm round">点击生成二维码,扫码入场</view>
+															
+															<view class="text-content"> 我的座位：{{item.library.name +":"+item.position.left+"排"+item.position.right+"列"}}</view>
+															<view>
+																<view class="cu-tag bg-green light sm round">开始时间：{{item.start_time}}</view>
+																<br/>
+																<view class="cu-tag bg-green light sm round">结束时间：{{item.end_time}}</view>
+																
 															</view>
 														</view>
 													</view>
@@ -57,13 +81,20 @@
 	export default {
 		data() {
 			return {
+				showlist:'library',
 				showpicture:true,
 				alllibrary:[],
 				allgoods:[],
-			
 			}
 		},
     methods: {
+		goscan(){
+			this.$u.route('/pages/home/scanner/scanner')
+		},
+		change(ty){
+			this.showlist = ty
+			console.log(this.showlist)
+		},
 		goseat(item){
 			uni.setStorageSync("library", item)
 			this.$u.route('/pages/home/seat/seat')
