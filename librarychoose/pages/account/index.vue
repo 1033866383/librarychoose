@@ -3,7 +3,7 @@
 	<view class="content">
 		
 		<view class="userback">
-			<img src="https://ossweb-img.qq.com/images/lol/img/champion/Morgana.png">
+			<img src="/static/icon.png">
 			<view style="font-size: 30px;">
 				{{user.name}}
 			</view>
@@ -17,6 +17,9 @@
 				<view class="content">软件版本</view>												
 				<view class="action">1.0.0</view>															
 			</view>			
+			<view class="cu-item">
+				<view class="content">个人积分: {{user.info.credit >= 51 ? user.info.credit + "(正常)" : user.info.credit + "(异常)"}}</view>																									 
+			</view>
 		</view>		
 		<my-component-tabar />
 		<view class="btn-row">
@@ -26,8 +29,8 @@
 </template>
 <script>
 	import {
-		
-	} from 'vuex'
+	  UserInfo
+	} from '@/api/login.js'
 	export default {
 		data() {
 			return {
@@ -39,6 +42,13 @@
 				uni.clearStorage()
 				this.$u.route('/pages/login/login/index')
 			}
+		},
+		mounted() {
+			UserInfo().then(x=>{
+				let da = uni.getStorageSync("lifeData")
+				da.info.credit = x.data.info.credit
+				uni.setStorageSync("lifeData", da)
+			})
 		}
 	}
 </script>

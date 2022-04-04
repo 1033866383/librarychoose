@@ -23,3 +23,9 @@ function() {
     return request.get('goods/allgoodsinfo')
     .then(data=>{return data.data})
 }
+
+export const CancelGoods = 
+function(id) {
+    return request.get('goods/cancelgoods?id='+id)
+    .then(data=>{return data.data})
+}

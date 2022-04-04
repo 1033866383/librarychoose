@@ -38,7 +38,7 @@
 													</view>
 												</view>
 												
-												<view v-show="showlist === 'goods'" class="cu-item shadow" v-for="(item,i) in allgoods" @click="goscan">
+												<view v-show="showlist === 'goods'" class="cu-item shadow" v-for="(item,i) in allgoods" @click="goscan(item)">
 													<view class="title"><view class="text-cut">订单号：{{item.id}}</view></view>
 													<view class="content" >
 														
@@ -88,7 +88,8 @@
 			}
 		},
     methods: {
-		goscan(){
+		goscan(item){
+			uni.setStorageSync("goods", item.id)
 			this.$u.route('/pages/home/scanner/scanner')
 		},
 		change(ty){
