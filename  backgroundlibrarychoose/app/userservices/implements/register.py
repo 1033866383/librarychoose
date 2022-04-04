@@ -1,3 +1,5 @@
+import json
+import os
 import re
 
 from flask import current_app, request
@@ -31,11 +33,21 @@ class Register(Resource):
             res = session.query(User).filter(User.email == params.get("email")).all()
             if len(res) > 0:
                 return response(status_code=500, msg="邮箱已使用")
+            sup, _ = os.path.split(__file__)
+            sup, _ = os.path.split(sup)
+            sup, _ = os.path.split(sup)
+            with open(sup + os.sep + "static" + os.sep + "icon.png", "rb") as img:
+                with open(sup + os.sep + "static" + os.sep + "{0}_icon.png".format(params.get("username")),"w+") as img_copy:
+                    pass
+                with open(sup + os.sep + "static" + os.sep + "{0}_icon.png".format(params.get("username")), "rb+") as img_copy:
+                    img_copy.write(img.read())
+            info = {"icon": sup + os.sep + "static" + os.sep + "{0}_icon.png".format(params.get("username")), "credit": 100}
             item_user = User(username=params.get("username"),
                              password=params.get("password"),
                              email=params.get("email"),
                              iphone=params.get("iphone", ""),
                              name=params.get("name"),
-                             role_id=Permissions.NORMAL_USER)
+                             role_id=Permissions.NORMAL_USER,
+                             info=json.dumps(info))
             session.add(item_user)
             return response()

@@ -1,6 +1,7 @@
+import json
 import time
 import uuid
-from datetime import datetime, timedelta
+from datetime import datetime
 
 from flask import current_app, request
 from flask_restful import Resource
@@ -43,10 +44,15 @@ class AddGoods(Resource):
             return response(status_code=500, msg="订单时长不能大于24小时")
         with connect() as session:
             user = session.query(User).filter(User.username == username).first()
+            credit = json.loads(user.info).get("credit")
             if not user:
                 return response(status_code=500, msg="用户未登录")
             elif user.role_id == Permissions.BADE_USER:
                 return response(status_code=500, msg="您已被拉黑,无法进行座位预订")
+            elif not credit:
+                return response(status_code=500, msg="您的积分不足")
+            elif int(credit) <=50:
+                return response(status_code=500, msg="您的积分不足,无法预定")
             seat_item = session.query(Seat).filter(Seat.id == seat).first()
             if not seat_item:
                 return response(status_code=500, msg="illegal param seat")
