@@ -13,21 +13,7 @@ public class User {
     private String email;
     private String iphone;
     private String info;
-    @TableField("role_id")
-    private String roleId;
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                ", email='" + email + '\'' +
-                ", iphone='" + iphone + '\'' +
-                ", info='" + info + '\'' +
-                ", roleId='" + roleId + '\'' +
-                '}';
-    }
+    private Integer roleId;
 
     public Integer getId() {
         return id;
@@ -77,11 +63,24 @@ public class User {
         this.info = info;
     }
 
-    public String getRoleId() {
+    public Integer getRoleId() {
         return roleId;
     }
 
-    public void setRoleId(String roleId) {
+    public void setRoleId(Integer roleId) {
         this.roleId = roleId;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", email='" + email + '\'' +
+                ", iphone='" + iphone + '\'' +
+                ", info='" + info + '\'' +
+                ", roleId=" + roleId +
+                '}';
     }
 }

@@ -1,31 +1,69 @@
-import com.baomidou.mybatisplus.extension.conditions.query.QueryChainWrapper;
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import dao.User;
 import dao.UserMapper;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
-import org.mybatis.spring.annotation.MapperScan;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.Reader;
-import java.util.Arrays;
+import java.io.*;
 import java.util.List;
+import java.util.Map;
 
 
 public class Task {
-    public static void main(String[] args) throws FileNotFoundException {
-        //通过配置文件获取数据库连接信息
-        Reader reader = new FileReader(System.getProperty("user.dir") + File.separator + "src" + File.separator + "main" + File.separator + "java" + File.separator + "mybatis-plus.xml");
-//通过配置信息构建SqlSessionFactory
-        SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(reader);
-//通过sqlSessionFactory打开数据库会话
-        SqlSession sqlSession = sqlSessionFactory.openSession();
-//        Connection connection = sqlSession.getConnection();
-//        System.out.println(connection);
-        UserMapper mapper = sqlSession.getMapper(UserMapper.class);
-        List<User> list = mapper.all();
-        System.out.println(list);
+    private static SqlSession sqlSession = null;
+    private static UserMapper userMapper = null;
+
+    public Task() {
+        if (Task.sqlSession == null) {
+            Reader reader = null;
+            try {
+                reader = new FileReader(System.getProperty("user.dir") + File.separator + "src" + File.separator + "main" + File.separator + "java" + File.separator + "mybatis-plus.xml");
+                SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(reader);
+                sqlSession = sqlSessionFactory.openSession();
+                userMapper = sqlSession.getMapper(UserMapper.class);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } finally {
+                if (reader != null) {
+                    try {
+                        reader.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        Task task = new Task();
+        task.addEveryDayCredit();
+    }
+
+    public void addEveryDayCredit() {
+        List<User> userList = userMapper.all();
+        userList.forEach(user -> {
+            String info = user.getInfo();
+            Map<String, Object> infoMap = (Map<String, Object>) JSON.parse(info);
+            int credit = (int) infoMap.get("credit");
+            credit = credit >= 50 ? 100 : credit + 50;
+            infoMap.put("credit", credit);
+            user.setInfo(JSONObject.toJSONString(infoMap));
+            System.out.println(user);
+            userMapper.updateById(user);
+            this.commit();
+        });
+    }
+
+    protected void commit() {
+        try {
+            sqlSession.commit();
+        } catch (RuntimeException runtimeException) {
+            runtimeException.printStackTrace();
+            sqlSession.rollback();
+        }
+
     }
 }
