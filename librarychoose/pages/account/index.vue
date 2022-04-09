@@ -20,7 +20,7 @@
 			<view class="cu-item">
 				<view class="content">个人积分: {{user.info.credit >= 51 ? user.info.credit + "(正常)" : user.info.credit + "(异常)"}}</view>																									 
 			</view>
-			<view class="cu-item">
+			<view class="cu-item"v-if="user.role === 1">
 				
 				<view class="content" @click="goaddlib">添加自习室</view>																									 
 			</view>
