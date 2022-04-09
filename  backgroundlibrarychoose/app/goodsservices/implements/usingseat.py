@@ -4,7 +4,7 @@ from datetime import datetime
 from flask import current_app, request
 from flask_restful import Resource
 
-from app.dao.base import connect, User, Permissions, Goods, alchemy2json
+from app.dao.base import connect, User, Permissions, Goods
 from app.util.jwtutil import verify_jwt
 from app.util.response import response
 
@@ -29,5 +29,6 @@ class UsingSeat(Resource):
             if user.role_id == Permissions.NORMAL_USER or user.role_id == Permissions.BADE_USER or user.role_id == Permissions.USER_MANAGE:
                 res = session.query(Goods.seat).filter(
                     Goods.end_time >= datetime.strptime(start_time, "%Y-%m-%d %H:%M:%S")).filter(
-                    Goods.start_time <= datetime.strptime(end_time, "%Y-%m-%d %H:%M:%S")).all()
+                    Goods.start_time <= datetime.strptime(end_time, "%Y-%m-%d %H:%M:%S")).filter(
+                    Goods.status == 0).all()
             return response([i[0] for i in res])
