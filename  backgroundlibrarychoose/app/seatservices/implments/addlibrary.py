@@ -22,8 +22,8 @@ class AddLibrary(Resource):
             return response(status_code=500, msg="名称有误")
         if not max_seat or not re.match("\d{1,4}$", max_seat):
             return response(status_code=500, msg="可容纳人数有误")
-        if int(max_seat) > 1000:
-            return response(status_code=500, msg="可容纳人数不能超过1000")
+        if int(max_seat) > 50:
+            return response(status_code=500, msg="可容纳人数不能超过50")
         if not position or not re.match("\S{1,100}$", position):
             return response(status_code=500, msg="位置有误")
         with connect() as session:

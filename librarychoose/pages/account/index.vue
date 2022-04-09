@@ -20,6 +20,10 @@
 			<view class="cu-item">
 				<view class="content">个人积分: {{user.info.credit >= 51 ? user.info.credit + "(正常)" : user.info.credit + "(异常)"}}</view>																									 
 			</view>
+			<view class="cu-item">
+				
+				<view class="content" @click="goaddlib">添加自习室</view>																									 
+			</view>
 		</view>		
 		<my-component-tabar />
 		<view class="btn-row">
@@ -41,15 +45,21 @@
 			logout(){
 				uni.clearStorage()
 				this.$u.route('/pages/login/login/index')
+			},
+			goaddlib(){
+				// this.$u.route('/pages/login/login/index')
+				uni.reLaunch({
+					url: '/pages/account/addlibray/addlibray'
+				});
 			}
 		},
-		mounted() {
+		created() {
 			UserInfo().then(x=>{
 				let da = uni.getStorageSync("lifeData")
 				da.info.credit = x.data.info.credit
 				uni.setStorageSync("lifeData", da)
 			})
-		}
+		},
 	}
 </script>
 <style>

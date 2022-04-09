@@ -79,6 +79,15 @@
             }
             
         }
+        ,{
+            "path" : "pages/account/addlibray/addlibray",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
   // "subPackages": [{
   //   "root": "packageaccount",
