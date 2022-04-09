@@ -14,6 +14,9 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 @Transactional(rollbackFor = Exception.class)
 public class Task {
@@ -45,9 +48,7 @@ public class Task {
 
     public static void main(String[] args) {
         Task task = new Task();
-        if(!task.isAdd()){
-            task.addEveryDayCredit();
-        }
+        task.taskSchedule();
     }
 
     public boolean isAdd(){
@@ -91,5 +92,21 @@ public class Task {
             sqlSession.rollback();
         }
 
+    }
+
+    public void taskSchedule() {
+        Runnable runnable = new Runnable() {
+            Task task = new Task();
+            public void run() {
+                if(!task.isAdd()){
+                    task.addEveryDayCredit();
+                }
+                System.out.println("end");
+            }
+        };
+        long delay = 0;  //延迟执行时间（秒）
+        long period = 1; //执行的时间间隔（秒）
+        ScheduledExecutorService service = Executors.newSingleThreadScheduledExecutor();
+        service.scheduleAtFixedRate(runnable, delay, period, TimeUnit.SECONDS);
     }
 }
