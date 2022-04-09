@@ -48,7 +48,9 @@ public class Task {
 
     public static void main(String[] args) {
         Task task = new Task();
-        task.taskSchedule();
+        if(!task.isAdd()){
+            task.addEveryDayCredit();
+        }
     }
 
     public boolean isAdd(){
@@ -93,7 +95,13 @@ public class Task {
         }
 
     }
+}
 
+class Run{
+    public static void main(String[] args) {
+        Run run = new Run();
+        run.taskSchedule();
+    }
     public void taskSchedule() {
         Runnable runnable = new Runnable() {
             public void run() {
