@@ -96,8 +96,8 @@ public class Task {
 
     public void taskSchedule() {
         Runnable runnable = new Runnable() {
-            Task task = new Task();
             public void run() {
+                Task task = new Task();
                 if(!task.isAdd()){
                     task.addEveryDayCredit();
                 }
@@ -107,6 +107,6 @@ public class Task {
         long delay = 0;  //延迟执行时间（秒）
         long period = 1; //执行的时间间隔（秒）
         ScheduledExecutorService service = Executors.newSingleThreadScheduledExecutor();
-        service.scheduleAtFixedRate(runnable, delay, period, TimeUnit.SECONDS);
+        service.scheduleAtFixedRate(runnable, delay, period, TimeUnit.DAYS);
     }
 }
