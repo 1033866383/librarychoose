@@ -27,7 +27,7 @@ public class Task {
         if (Task.sqlSession == null) {
             Reader reader = null;
             try {
-                reader = new FileReader(System.getProperty("user.dir") + File.separator + "src" + File.separator + "main" + File.separator + "java" + File.separator + "mybatis-plus.xml");
+                reader = new FileReader(System.getProperty("user.dir") + File.separator + "mybatis-plus.xml");
                 SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(reader);
                 sqlSession = sqlSessionFactory.openSession();
                 userMapper = sqlSession.getMapper(UserMapper.class);

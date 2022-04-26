@@ -22,8 +22,8 @@
         </environment>
     </environments>
     <mappers>
-        <mapper resource="dao\UserMapper.xml"/>
-        <mapper resource="dao\AddCreditMapper.xml"/>
+        <mapper resource="UserMapper.xml"/>
+        <mapper resource="AddCreditMapper.xml"/>
     </mappers>
 
 
